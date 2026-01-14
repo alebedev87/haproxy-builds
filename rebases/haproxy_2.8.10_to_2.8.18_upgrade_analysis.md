@@ -15,7 +15,7 @@ This report analyzes bug fixes between HAProxy versions 2.8.10 and 2.8.18 to ass
 
 ### CVE-2025-11230: mjson DoS Vulnerability
 
-**Commit**: `444144e4ead6044f4bb53f9b23c80a305da022e6`
+**Commit**: [`444144e4ead6044f4bb53f9b23c80a305da022e6`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=444144e4ead6044f4bb53f9b23c80a305da022e6)
 **Subsystem**: mjson (Lua integration)
 **Version Fixed**: 2.8.16
 
@@ -70,13 +70,13 @@ This reduces the complexity from billions of operations to approximately 30 oper
 
 ### 1. Stream Processing: Channel Analysis Regression
 
-**Commit**: `99eb7ae8917b0d79672d842bcedaef6fcc321b7e`
+**Commit**: [`99eb7ae8917b0d79672d842bcedaef6fcc321b7e`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=99eb7ae8917b0d79672d842bcedaef6fcc321b7e)
 **Subsystem**: Stream processing / channel handling
 **Version Fixed**: 2.8.16
 
 **Impact**: Streams can hang indefinitely when shutdown events occur during synchronous sends, causing connection leaks and resource exhaustion.
 
-**Technical Details**: A previous fix (commit a498e527b) attempted to detect synchronous sends but incorrectly masked write events, potentially hiding shutdown notifications. When an error triggers a shutdown while a write event is pending, the stream never processes the shutdown and remains blocked forever (unless a timeout is configured).
+**Technical Details**: A previous fix (commit [a498e527b](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=a498e527b)) attempted to detect synchronous sends but incorrectly masked write events, potentially hiding shutdown notifications. When an error triggers a shutdown while a write event is pending, the stream never processes the shutdown and remains blocked forever (unless a timeout is configured).
 
 **Affected Configurations**: All deployments, particularly those with:
 - High connection churn
@@ -90,7 +90,7 @@ This reduces the complexity from billions of operations to approximately 30 oper
 
 ### 2. Listeners: Connection Accounting Corruption
 
-**Commit**: `27c07abe4290f386ab7e15c2a00e66fcd57d42ad`
+**Commit**: [`27c07abe4290f386ab7e15c2a00e66fcd57d42ad`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=27c07abe4290f386ab7e15c2a00e66fcd57d42ad)
 **Subsystem**: Listener management
 **Version Fixed**: 2.8.14
 
@@ -111,7 +111,7 @@ This reduces the complexity from billions of operations to approximately 30 oper
 
 ### 3. Mux-H1: Zero-Copy Forwarding Deadlock
 
-**Commit**: `1b531863690a36a15c41a3c4b655f2a6c769e3a0`
+**Commit**: [`1b531863690a36a15c41a3c4b655f2a6c769e3a0`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=1b531863690a36a15c41a3c4b655f2a6c769e3a0)
 **Subsystem**: HTTP/1 multiplexer
 **Version Fixed**: 2.8.11
 
@@ -130,7 +130,7 @@ This reduces the complexity from billions of operations to approximately 30 oper
 
 ### 4. OCSP: Reference Counting Corruption
 
-**Commit**: `7a5ca2a36f0317218a9a5292d886a29e67865805`
+**Commit**: [`7a5ca2a36f0317218a9a5292d886a29e67865805`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=7a5ca2a36f0317218a9a5292d886a29e67865805)
 **Subsystem**: SSL/TLS OCSP stapling
 **Version Fixed**: 2.8.13
 
@@ -150,7 +150,7 @@ This reduces the complexity from billions of operations to approximately 30 oper
 
 ### 5. QUIC: CRYPTO Frame Buffer Overflow Protection
 
-**Commit**: `c090f3418fc5ca896d50cba59260e26e3e599c0e`
+**Commit**: [`c090f3418fc5ca896d50cba59260e26e3e599c0e`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=c090f3418fc5ca896d50cba59260e26e3e599c0e)
 **Subsystem**: QUIC protocol
 **Version Fixed**: 2.8.14
 
@@ -167,7 +167,7 @@ This reduces the complexity from billions of operations to approximately 30 oper
 
 ### 6. QUIC: Packet Building with Acknowledged Frames
 
-**Commit**: `2d1c69de6de756eac342c4f80e116b9f71824800`
+**Commit**: [`2d1c69de6de756eac342c4f80e116b9f71824800`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=2d1c69de6de756eac342c4f80e116b9f71824800)
 **Subsystem**: QUIC protocol
 **Version Fixed**: 2.8.11
 
@@ -183,7 +183,7 @@ This reduces the complexity from billions of operations to approximately 30 oper
 
 ### 7. QUIC: CRYPTO Frame Handling Vulnerability
 
-**Commit**: `e78271f988d8e09c0a718a7a06ac160932098d31`
+**Commit**: [`e78271f988d8e09c0a718a7a06ac160932098d31`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=e78271f988d8e09c0a718a7a06ac160932098d31)
 **Subsystem**: QUIC protocol
 **Version Fixed**: 2.8.17
 
@@ -210,9 +210,9 @@ Critical areas addressed:
 - **Build compatibility**: AWS-LC library support
 
 **Key Fixes**:
-- `135c87ce`: SSL create the mux immediately on early data
-- `324fd5c3`: SSL take care of second client hello
-- `1f21378d`: SSL crash from dangling ckch_store reference
+- [`135c87ce`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=135c87ce): SSL create the mux immediately on early data
+- [`324fd5c3`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=324fd5c3): SSL take care of second client hello
+- [`1f21378d`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=1f21378d): SSL crash from dangling ckch_store reference
 
 **Impact**: SSL/TLS connection failures, crashes during certificate updates, 0-RTT functionality issues, interoperability problems with specific TLS clients.
 
@@ -226,7 +226,7 @@ Critical areas addressed:
 - **Stream termination**: Proper term flag propagation on errors
 
 **Key Fixes**:
-- `c18bf84b`: Mux-h2 make sure not to move a dead connection to idle (final fix)
+- [`c18bf84b`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=c18bf84b): Mux-h2 make sure not to move a dead connection to idle (final fix)
 - `BUG/MEDIUM: mux-h2: Check the number of headers in HEADERS frame after decoding`
 - `BUG/MEDIUM: mux-h2: Don't send RST_STREAM frame for streams with no ID`
 
@@ -286,9 +286,9 @@ Critical areas addressed:
 - **Pseudo-header validation**: Stricter validation of `:scheme` and `:method` pseudo-headers
 
 **Key Fixes**:
-- `b6c8c41e`: H3 do not overwrite interim with final response
-- `b527416c`: H3 properly encode response after interim one in same buf
-- `7c4f173e`: H3 handle interim response properly on FE side
+- [`b6c8c41e`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=b6c8c41e): H3 do not overwrite interim with final response
+- [`b527416c`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=b527416c): H3 properly encode response after interim one in same buf
+- [`7c4f173e`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=7c4f173e): H3 handle interim response properly on FE side
 
 **Impact**: HTTP/3 clients experiencing header corruption, connection failures, or protocol violations. Particularly important for applications using Server-Sent Events (SSE) or early hints.
 
@@ -301,7 +301,7 @@ Additional fixes beyond the MAJOR bugs:
 - **Race conditions**: DCID exit without unlocking, CID thread assignment
 
 **Key Fixes**:
-- `9a069b6d`: QUIC CRYPTO frame freeing without eb_delete()
+- [`9a069b6d`](https://git.haproxy.org/?p=haproxy-2.8.git;a=commit;h=9a069b6d): QUIC CRYPTO frame freeing without eb_delete()
 - `BUG/MEDIUM: quic: prevent crash due to CRYPTO parsing error`
 - `BUG/MEDIUM: quic: prevent conn freeze on 0RTT undeciphered content`
 
