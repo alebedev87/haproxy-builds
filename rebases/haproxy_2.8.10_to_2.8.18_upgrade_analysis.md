@@ -109,7 +109,26 @@ This reduces the complexity from billions of operations to approximately 30 oper
 - HAProxy stops accepting connections despite being under capacity
 - High CPU usage in poller trying to accept connections
 
-### 3. OCSP: Reference Counting Corruption
+### 3. Mux-H1: Zero-Copy Forwarding Deadlock
+
+**Commit**: `1b531863690a36a15c41a3c4b655f2a6c769e3a0`
+**Subsystem**: HTTP/1 multiplexer
+**Version Fixed**: 2.8.11
+
+**Impact**: H1 connections in CLOSING state with zero-copy forwarding enabled never wake the stream connector to perform the final forwarding, leading to connection leaks. Without shutdown timeouts configured, connections remain indefinitely.
+
+**Technical Details**: When the H1 mux receives I/O events with zero-copy forwarding enabled, it blocks receives and wakes the stream connector to perform the forwarding. However, H1 connections in CLOSING state were not triggering this wakeup, causing the connection closure to be ignored.
+
+**Affected Configurations**:
+- All HTTP/1 configurations
+- Particularly when zero-copy forwarding is used (Linux with splice support)
+
+**When to Be Concerned**:
+- You observe connection leaks
+- `show sess all` shows connections stuck in CLOSING state
+- Memory usage increases over time
+
+### 4. OCSP: Reference Counting Corruption
 
 **Commit**: `7a5ca2a36f0317218a9a5292d886a29e67865805`
 **Subsystem**: SSL/TLS OCSP stapling
@@ -128,24 +147,6 @@ This reduces the complexity from billions of operations to approximately 30 oper
 - You dynamically manage certificates via CLI
 - You observe crashes in SSL/OCSP code paths
 
-### 4. Mux-H1: Zero-Copy Forwarding Deadlock
-
-**Commit**: `1b531863690a36a15c41a3c4b655f2a6c769e3a0`
-**Subsystem**: HTTP/1 multiplexer
-**Version Fixed**: 2.8.11
-
-**Impact**: H1 connections in CLOSING state with zero-copy forwarding enabled never wake the stream connector to perform the final forwarding, leading to connection leaks. Without shutdown timeouts configured, connections remain indefinitely.
-
-**Technical Details**: When the H1 mux receives I/O events with zero-copy forwarding enabled, it blocks receives and wakes the stream connector to perform the forwarding. However, H1 connections in CLOSING state were not triggering this wakeup, causing the connection closure to be ignored.
-
-**Affected Configurations**:
-- All HTTP/1 configurations
-- Particularly when zero-copy forwarding is used (Linux with splice support)
-
-**When to Be Concerned**:
-- You observe connection leaks
-- `show sess all` shows connections stuck in CLOSING state
-- Memory usage increases over time
 
 ### 5. QUIC: CRYPTO Frame Buffer Overflow Protection
 
