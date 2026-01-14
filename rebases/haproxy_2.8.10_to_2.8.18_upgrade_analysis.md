@@ -337,8 +337,6 @@ Critical areas addressed:
 
 ### Other Subsystems (67)
 
-**Server Management (3 bugs)**: Healthcheck updates via CLI, FQDN change handling, stuck maintenance state
-
 **Checks/Healthchecks (4 bugs)**: ALPN inheritance, requeuing on I/O events, setting SOCKERR on errors, timeout handling
 
 **Stick Tables (4 bugs)**: Proper session return from stktable_set_entry(), reference counting, string-type key indexing, locking on converters
@@ -347,45 +345,23 @@ Critical areas addressed:
 
 **H2 Protocol (2 bugs)**: Header field name validation (forbidding 'Z'), early HTX EOM for tunneled streams
 
+**Clock/Timing (3 bugs)**: Ensuring now_ms != TICK_ETERNITY, detecting time jumps, updating date offset on jumps
+
 **Backend (2 bugs)**: Not overwriting srv dst address on reuse, fixing reuse with set-dst/set-dst-port
 
 **FD Management (2 bugs)**: Using correct tgid in fd_insert(), marking transferred FDs as FD_CLONED
-
-**Clock/Timing (3 bugs)**: Ensuring now_ms != TICK_ETERNITY, detecting time jumps, updating date offset on jumps
 
 **DNS/Resolvers (2 bugs)**: Reconnect tempo reset, FQDN normalization, resolution wait list insertion
 
 **Patterns (2 bugs)**: Preventing uninitialized reads in pat_match_str/beg, preventing UAF on reused pattern expr
 
-**SPOE (2 bugs)**: Not waking idle applets in loop during stopping, creating SPOE applet if none on thread
-
-**Peers (2 bugs)**: Preventing expiration too far in future from unsync nodes
-
-**CLI (2 bugs)**: Deadlock when setting frontend maxconn, releasing back endpoint between mcli commands
-
 **JWT (2 bugs)**: Missing case in switch, clearing SSL error queue on signature check failure
 
 **Debug/Tracing (2 bugs)**: Fix for "show threads" with low thread counts, null deref in lockon mechanism
 
-**Thread Management (2 bugs)**: Using pthread_self() not ha_pthread[tid] in set_affinity, disabling macOS libgcc_s workaround
-
-**Sink (1 bug)**: Retry attempt for sft server
-
-**Filters (1 bug)**: Handling data filters with no payload callback
-
-**HTX (1 bug)**: Wrong count computation in htx_xfer_blks()
-
-**Mailers (1 bug)**: Applying offsets to now_ms in expiration
-
-**Promex (1 bug)**: Wait for request before sending response
-
 **Cache/Stats (1 bug)**: Wait for request before sending response
 
-**Event Handler (1 bug)**: Fix uninitialized value in async mode
-
 **Init (1 bug)**: Fix fd_hard_limit default in compute_ideal_maxconn
-
-**BWLimit (1 bug)**: Never setting analyze expiration in past
 
 **Connection/HTTP Reuse (1 bug)**: Fix address collision on unhandled address families
 
@@ -414,15 +390,7 @@ Critical areas addressed:
 
 **HTTP Analysis (7 bugs)**: Request parsing edge cases, header handling, various analysis path fixes
 
-**CLI (7 bugs)**: Command parsing, output formatting, error handling
-
 **SSL/TLS (5 bugs)**: Dead code removal, SSL_CTX_new error handling, global_ssl deinitialization, ClientHello handling
-
-**Lua (5 bugs)**: HTTP applet data accounting, missing case statements, memory leak fixes
-
-**Sink (4 bugs)**: Retry mechanisms, log forwarding edge cases
-
-**Pattern Matching (4 bugs)**: Various pattern matching edge cases and validation
 
 **Mux-H1 (4 bugs)**: Connection state handling, timeout application
 
@@ -445,8 +413,6 @@ Critical areas addressed:
 **H1 Protocol (3 bugs)**: HTTP/1 parsing edge cases
 
 **Backend (3 bugs)**: Server selection and connection management
-
-**Additional subsystems** (50+ bugs across 30+ components): Memory allocation OOM checks, stick-table handling, SPOE edge cases, peer protocol, HTTP client, halog utility, DNS, clock handling, and many others.
 
 ### Common Themes in MINOR Bugs
 
