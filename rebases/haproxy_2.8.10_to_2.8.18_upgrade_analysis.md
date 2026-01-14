@@ -197,9 +197,9 @@ This reduces the complexity from billions of operations to approximately 30 oper
 - You're experiencing connection failures from Chrome or Firefox browsers
 - Clients are updated to recent versions (post-August 2025)
 
-## MEDIUM Bugs by Subsystem (129 bugs)
+## MEDIUM Bugs (129)
 
-### SSL/TLS (8 bugs)
+### SSL/TLS (8)
 
 Critical areas addressed:
 - **Early data (0-RTT) handling**: Multiple fixes for TLS 1.3 early data on both client and server sides
@@ -215,7 +215,7 @@ Critical areas addressed:
 
 **Impact**: SSL/TLS connection failures, crashes during certificate updates, 0-RTT functionality issues, interoperability problems with specific TLS clients.
 
-### Mux-H2 (HTTP/2 Multiplexer) (6 bugs)
+### HTTP/2 Multiplexer (6)
 
 Critical areas addressed:
 - **Connection lifecycle**: Preventing dead connections from being moved to idle pool (fix reverted then re-applied correctly)
@@ -231,7 +231,7 @@ Critical areas addressed:
 
 **Impact**: Connection pool corruption, protocol violations, stream handling errors.
 
-### HTTP Client (6 bugs)
+### HTTP Client (6)
 
 Critical areas addressed:
 - **Data flow control**: HTX_FL_EOM flag checking before buffer commits
@@ -242,7 +242,7 @@ Critical areas addressed:
 
 **Impact**: HTTP client functionality in Lua scripts, healthchecks, or other internal HTTP client usage.
 
-### Stream Connectors (5 bugs)
+### Stream Connectors (5)
 
 Critical areas addressed:
 - **Timer handling**: Only considering I/O timers for stream expiration
@@ -252,7 +252,7 @@ Critical areas addressed:
 
 **Impact**: Connection timeout issues, improper connection state handling.
 
-### Queue Management (5 bugs)
+### Queue Management (5)
 
 Critical areas addressed:
 - **Server queue processing**: Correct return value (stream count) from process_srv_queue()
@@ -264,7 +264,7 @@ Critical areas addressed:
 
 **Impact**: Queue processing errors, stuck connections in queues, server selection issues.
 
-### HTTP Analysis (5 bugs)
+### HTTP Analysis (5)
 
 Critical areas addressed:
 - **Tunnel mode**: Not closing server connections on read0 in TUNNEL mode
@@ -276,7 +276,7 @@ Critical areas addressed:
 
 **Impact**: Connection handling in various HTTP scenarios, proper error reporting, retry functionality.
 
-### HTTP/3 Protocol (9 bugs)
+### HTTP/3 Protocol (9)
 
 Critical areas addressed:
 - **Interim response handling**: Multiple fixes for 1xx responses (informational) being incorrectly handled, overwritten, or corrupted when followed by final responses
@@ -291,7 +291,7 @@ Critical areas addressed:
 
 **Impact**: HTTP/3 clients experiencing header corruption, connection failures, or protocol violations. Particularly important for applications using Server-Sent Events (SSE) or early hints.
 
-### QUIC Protocol (7 bugs, beyond MAJOR issues)
+### QUIC Protocol (7)
 
 Additional fixes beyond the MAJOR bugs:
 - **CRYPTO frame management**: Freeing without eb_delete(), proper parsing error handling
@@ -306,7 +306,7 @@ Additional fixes beyond the MAJOR bugs:
 
 **Impact**: Connection stability, race condition crashes, handshake failures.
 
-### Lua Integration (6 bugs)
+### Lua Integration (6)
 
 Critical areas addressed:
 - **Sample function safety**: Proper error handling in hlua_run_sample_fetch/conv()
@@ -323,7 +323,7 @@ Critical areas addressed:
 
 **Impact**: Lua script crashes, data loss, security violations in Lua services.
 
-### Mux-QUIC (5 bugs)
+### Mux-QUIC (5)
 
 Critical areas addressed:
 - **Wakeup behavior**: Proper wakeup sequencing
@@ -335,7 +335,7 @@ Critical areas addressed:
 
 **Impact**: QUIC multiplexing stability, connection management.
 
-### Other Subsystems (67+ bugs)
+### Other Subsystems (67)
 
 **Server Management (3 bugs)**: Healthcheck updates via CLI, FQDN change handling, stuck maintenance state
 
@@ -389,7 +389,7 @@ Critical areas addressed:
 
 **Connection/HTTP Reuse (1 bug)**: Fix address collision on unhandled address families
 
-## MINOR Bugs by Subsystem (198 bugs)
+## MINOR Bugs (198)
 
 ### Top Subsystems with MINOR Fixes
 
